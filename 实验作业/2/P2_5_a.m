@@ -24,11 +24,11 @@ subplot(3, 1, 2), stem(nx, w2), set(get(gca, 'Title'), 'String', 'w_2[n]');
 
 subplot(3, 1, 3)
 hold on
-stem(nx, w3, 'm--s')
+stem(nx, w3, 'b--s')
 stem(nx, w4, 'r--p')
-set(get(gca, 'Title'), 'String', 'w_3[n] & w_4[n]');
+set(get(gca, 'Title'), 'String', 'w_3[n] and w_4[n]');
 legend('w_3[n]', 'w_4[n]', 'Location', 'southeast');
 
 
-saveas(gcf, "P2_5_a_1_out.png");
+saveas(gcf, "P2_5_a_1.png");
 
