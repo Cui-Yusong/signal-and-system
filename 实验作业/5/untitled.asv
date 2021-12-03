@@ -1,0 +1,26 @@
+%5.1
+[y1,fs]=audioread('C_01_01.wav');
+y1=y1';
+sig=repmat(y1,1,10);
+N = length(y1);
+noise=1-2*rand(1,N);
+[Pxx,w]=pwelch(sig,[],[],512,fs);
+figure(1);
+plot(w,Pxx);
+title('power spectral density of the speech signal');
+xlabel('w_speech');
+ylabel('Pxx');
+ saveas(gcf, "1_1.png");
+ close;
+
+b=fir2(3000,w/(fs/2),sqrt(Pxx/max(Pxx)));
+[h,wh]=freqz(b,1,128);
+ssn=filter(b,1,noise);
+[Pxx1,w1]=pwelch(ssn,[],[],512,fs);
+figure(2);
+plot(w1,Pxx1);
+title('The power spectral density of the speech-shaped noise');
+xlabel('w1');
+ylabel('Pxx1');
+ saveas(gcf, "1_2.png");
+ close;
