@@ -21,10 +21,10 @@ noisySignal=data+SSN';%add up the original signal and noise signal
 specOfNoise=fftshift(fft(noisySignal))/length(noisySignal);
 figure0 = figure;
 subplot(2,1,1),plot(w,abs(specOfData)),title('origianl signal'),xlabel('w1');
-saveas(figure0,'../fig/task4/orginal.jpg');
+% saveas(figure0,'../fig/task4/orginal.jpg');
 subplot(2,1,2),plot(w,abs(specOfNoise)),title('noisy signal'),xlabel('w1');
-audiowrite('../audio/task4/Task4_addingNoise_01_original.wav',data,fs);
-saveas(figure0,'../fig/task4/orginal+noise.jpg');
+% audiowrite('../audio/task4/Task4_addingNoise_01_original.wav',data,fs);
+% saveas(figure0,'../fig/task4/orginal+noise.jpg');
 for n = 1:4
     %implement the tone-vocoder to noisy signal
      w=linspace(-fs/2,fs/2,length(noisySignal));
