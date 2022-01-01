@@ -1,7 +1,10 @@
 %5.1
 [y1,fs]=audioread('C_01_01.wav');
+
 y1=y1';
+% y_sig = repeat(y1,5);
 %sound(y,fs);
+
 sig=repmat(y1,1,10);
 N = length(y1);
 noise=1-2*rand(1,N);
@@ -13,6 +16,14 @@ xlabel('w');
 ylabel('Pxx');
 % saveas(gcf, "plots/P5_1_out1.png");
 % close;
+
+% N = length(sig);
+% noise = 1-2*rand(1,N);
+% subplot((1:N))
+% 
+% b = fir2(3000,w/(fs/2),sqrt(Pxx/max(Pxx)));
+% [f,fh]=freqz(b,1,128,fs);
+
 
 b=fir2(3000,w/(fs/2),sqrt(Pxx/max(Pxx)));
 [h,wh]=freqz(b,1,128);
@@ -79,3 +90,18 @@ title('6th order');
 xlim([0,6000]);
 % saveas(gcf, "plots/P5_3_out2.png");
 % close;
+
+SSN = filter(b,1,noise);
+[Pxx2,w] = pwelch(SSN,[],[],512,fs);
+figure(4);
+subplot(2,1,1);
+
+figure(5)
+y = sig+SSN;
+y = y/norm(y)*norm(sig);
+SNR_XY = 20*log10(norm(sig)/norm(y));
+subplot(2,1,1);
+plot((1:length(sig))/fs,sig);xlabel('t (sec)');ylabel('sig');
+title('Speech Signal');
+
+
